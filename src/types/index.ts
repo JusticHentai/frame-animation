@@ -1,0 +1,33 @@
+import { ApiMap as MyApiMap, Merge } from '@bilibili-activity/douza-type'
+
+/**
+ * 初始化选项
+ */
+export interface Options {
+  el: HTMLDivElement // 要挂载的 dom
+  url: string // 帧动画图片 url
+  frame: number // 帧数
+  duration?: number // 持续时间 按 ms 计时
+  column?: number // 每行的列数 0 表示一行
+  imageLoadComplete?: (url: HTMLImageElement) => any // 图片加载完毕回调
+}
+
+/**
+ * 默认选项
+ */
+export interface DefaultOptions {
+  duration: number
+  column: number
+}
+
+/**
+ * 内部选项
+ */
+export type InnerOptions = Merge<Options, DefaultOptions> & {
+  [key: string]: any
+}
+
+/**
+ * 映射列表类型
+ */
+export type ApiMap = MyApiMap<InnerOptions>
