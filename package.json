@@ -1,7 +1,14 @@
 {
-  "name": "@bilibili-activity/frame-animation",
-  "version": "0.0.1",
-  "description": "开发用帧动画",
+  "name": "@justichentai/frame-animation",
+  "version": "1.0.0",
+  "description": "基于 raf 和 canvas 的帧动画工具",
+  "keywords": [
+    "justichentai",
+    "frame",
+    "animation",
+    "douza"
+  ],
+  "homepage": "https://github.com/JusticHentai/frame-animation",
   "repository": {
     "type": "git",
     "url": "https://git.bilibili.co/bilibili-activity/frame-animation"
@@ -13,14 +20,12 @@
   "typings": "dist/my-component.d.ts",
   "scripts": {
     "build": "rollup -c rollup.config.js",
-    "build:all": "rollup -c rollup.all.js",
     "test": "jest"
   },
   "devDependencies": {
     "@babel/core": "^7.16.12",
     "@babel/preset-env": "^7.16.11",
     "@babel/runtime": "^7.18.9",
-    "@bilibili-activity/douza-type": "workspace:*",
     "@rollup/plugin-babel": "^5.3.1",
     "@rollup/plugin-commonjs": "^22.0.1",
     "@rollup/plugin-node-resolve": "^13.1.3",
