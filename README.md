@@ -56,7 +56,8 @@ anime.pause()
 
 ### Update
 
-this api are used in element size resize
+this api is used in element size change
+you can use it to update frame-animation state
 ```ts
 anime.update()
 ```
