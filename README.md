@@ -1,6 +1,9 @@
 # Frame-animation
 
-基于 raf 和 canvas 的帧动画工具
+raf and canvas based frame animation tools
+Support for arbitrary rows of frame animation originals
+
+[中文文档](https://juejin.cn/post/7130862826486235167)
 
 ## Install
 
@@ -12,6 +15,8 @@ npm i @justichentai/frame-animation
 
 ### Simple Example
 
+frame-animation will automatically detect the size of your mounted element
+Make sure the size of the element is equal to the size of one frame
 ```ts
 import FrameAnime from '@justichentai/frame-animation'
 
@@ -21,6 +26,10 @@ const anime = new FrameAnime({
   duration: 2000,  
   el: dom,  
 })  
+
+await anime.init()
+
+anime.play()
 ```
 
 ### Options
@@ -35,6 +44,12 @@ export interface Options {
   imageLoadComplete?: (url: HTMLImageElement) => any // 图片加载完毕回调  
 }
 ```
+
+If the original image of your frame animation looks like this one line past
+![keyFrameTest.png](https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/9f6ef5f987184bb196f796533166d5a1~tplv-k3u1fbpfcp-watermark.image?)
+
+column set to 0 or not set
+If you have multiple rows, set column to how many columns there are in each row
 
 ### Load Image
 
@@ -56,9 +71,7 @@ anime.pause()
 
 ### Update
 
-this api is used in element size change
-you can use it to update frame-animation state
+this api is used in element size resize
 ```ts
 anime.update()
 ```
-
