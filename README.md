@@ -35,13 +35,13 @@ anime.play()
 ### Options
 
 ```ts
-export interface Options {  
-  el: HTMLDivElement // 要挂载的 dom  
-  url: string // 帧动画图片 url  
-  frame: number // 帧数  
-  duration?: number // 持续时间 按 ms 计时  
-  column?: number // 帧动画图片 每行的列数 0 表示一行  
-  imageLoadComplete?: (url: HTMLImageElement) => any // 图片加载完毕回调  
+export interface Options {
+  el: HTMLDivElement // The element to be mounted  
+  url: string // The original image of frame animation 
+  frame: number // Frame Rate  
+  duration?: number // Duration in ms  
+  column?: number // The number of columns per row of the original frame animation; 0 mean only one line;Default 0  
+  imageLoadComplete?: (url: HTMLImageElement) => any // Callback when image is loaded  
 }
 ```
 

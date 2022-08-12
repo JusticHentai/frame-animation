@@ -1,7 +1,7 @@
 {
   "name": "@justichentai/frame-animation",
-  "version": "1.0.1",
-  "description": "基于 raf 和 canvas 的帧动画工具",
+  "version": "1.0.2",
+  "description": "基于 raf 和 canvas 的帧动画工具; raf and canvas based frame animation tools",
   "keywords": [
     "justichentai",
     "frame",
