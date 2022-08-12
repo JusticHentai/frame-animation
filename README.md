@@ -15,7 +15,7 @@ npm i @justichentai/frame-animation
 
 ### Simple Example
 
-frame-animation will automatically detect the size of your mounted element
+frame-animation will automatically detect the size of your mounted element.
 Make sure the size of the element is equal to the size of one frame
 ```ts
 import FrameAnime from '@justichentai/frame-animation'
@@ -48,7 +48,7 @@ export interface Options {
 If the original image of your frame animation looks like this one line past
 ![keyFrameTest.png](https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/9f6ef5f987184bb196f796533166d5a1~tplv-k3u1fbpfcp-watermark.image?)
 
-column set to 0 or not set
+column set to 0 or not set.
 If you have multiple rows, set column to how many columns there are in each row
 
 ### Load Image
