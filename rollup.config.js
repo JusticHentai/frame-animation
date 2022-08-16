@@ -25,6 +25,8 @@ export default [
       // babel
       babel({
         babelHelpers: 'runtime',
+        // 跳过monorepo里的rollup问题
+        skipPreflightCheck: 'true',
         //支持 ts
         extensions: [...DEFAULT_EXTENSIONS, '.ts'],
         // @babel/plugin-transform-runtime 找不到的坑
