@@ -37,7 +37,7 @@ export default [
     ],
   },
   {
-    input: './src/index.ts',
+    input: './index.ts',
     output: [
       {
         file: './dist/my-component.d.ts',
