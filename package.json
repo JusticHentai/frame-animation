@@ -1,12 +1,11 @@
 {
   "name": "@justichentai/frame-animation",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "基于 raf 和 canvas 的帧动画工具; raf and canvas based frame animation tools",
   "keywords": [
     "justichentai",
     "frame",
-    "animation",
-    "douza"
+    "animation"
   ],
   "homepage": "https://github.com/JusticHentai/frame-animation",
   "repository": {
@@ -14,13 +13,12 @@
     "url": "https://github.com/JusticHentai/frame-animation"
   },
   "license": "ISC",
-  "author": "douza",
+  "author": "justichentai",
   "type": "module",
   "main": "dist/my-component.js",
   "typings": "dist/my-component.d.ts",
   "scripts": {
-    "build": "rollup -c rollup.config.js",
-    "test": "jest"
+    "build": "rollup -c rollup.config.js"
   },
   "devDependencies": {
     "@babel/core": "^7.18.10",
@@ -30,11 +28,7 @@
     "@rollup/plugin-babel": "^5.3.1",
     "@rollup/plugin-commonjs": "^22.0.1",
     "@rollup/plugin-node-resolve": "^13.1.3",
-    "@types/jest": "^28.1.3",
     "core-js": "^3.24.1",
-    "esbuild": "^0.14.51",
-    "esbuild-jest": "^0.5.0",
-    "jest": "^28.1.1",
     "rollup": "^2.77.2",
     "rollup-plugin-dts": "^4.2.2",
     "rollup-plugin-terser": "^7.0.2",
