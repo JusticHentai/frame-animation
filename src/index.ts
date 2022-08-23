@@ -109,17 +109,17 @@ export default class FrameAnimation {
     })
 
     // 每播完一次回调
-    if (currentTimes !== this.lastTimes) {
+    if (currentTimes < this.lastTimes) {
       this.options.completeOne && this.options.completeOne(currentTimes)
       this.lastTimes = currentTimes
     }
 
     // 暂停 或者 次数耗尽退出
-    if (!this.animeState || (this.times !== 0 && currentTimes === this.times)) {
+    if (!this.animeState || (this.times !== 0 && currentTimes >= this.times)) {
       this.animeState = false
       cancelAnimationFrame(this.renderFrameID)
 
-      if (this.times !== 0 && currentTimes === this.times) {
+      if (this.times !== 0 && currentTimes >= this.times) {
         this.times = 0
         this.options.complete && this.options.complete()
       }
