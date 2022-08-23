@@ -94,6 +94,12 @@ When you want to reverse the animation a specific number of times
 anime.reverse().playTimes(2)
 ```
 
+### Restart
+
+```ts
+anime.restart()
+```
+
 ### Update
 
 this api is used in element size resize

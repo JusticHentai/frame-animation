@@ -19,10 +19,10 @@ export default function getPosition(options: Options): Result {
 
   if (column !== 0) {
     const y = Math.ceil(currentFrame / column)
-    const x = currentFrame % column
+    const x = (currentFrame - 1) % column
 
     const currentTop = (y - 1) * height
-    const currentLeft = (x - 1) * width
+    const currentLeft = x * width
 
     return {
       top: currentTop,

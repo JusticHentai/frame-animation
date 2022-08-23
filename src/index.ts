@@ -134,8 +134,6 @@ export default class FrameAnimation {
       frame,
     })
 
-    console.log(currentFrame)
-
     // 已经渲染过就不反复渲染了
     if (currentFrame === this.lastFrame) {
       // 继续渲染下一帧
@@ -179,8 +177,6 @@ export default class FrameAnimation {
    * 启动动画
    */
   play(): FrameAnimation {
-    this.playState = true
-
     this.animeStart()
 
     return this
@@ -201,7 +197,26 @@ export default class FrameAnimation {
    */
   playTimes(n: number): FrameAnimation {
     // 播放到一半时调用播放多次 前面次数不算 多加一次
-    this.times = this.lastFrame === 0 ? n : n + 1
+    if (this.playState) {
+      this.times = this.lastFrame === 0 ? n : n + 1 // 初始化要画第一帧
+    } else {
+      this.times = this.lastFrame === 1 ? n : n + 1 // 倒放已经画好第一帧
+    }
+
+    this.animeStart()
+
+    return this
+  }
+
+  /**
+   * 重新播放
+   */
+  restart(): FrameAnimation {
+    this.animePause()
+
+    this.lastFrame = 0
+
+    this.playState = true
     this.animeStart()
 
     return this
