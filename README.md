@@ -72,12 +72,6 @@ anime.play()
 anime.pause()
 ```
 
-### Reverse Animation
-
-```ts
-anime.reverse()
-```
-
 ### Play Times
 
 This api can be played a specific number of times.
