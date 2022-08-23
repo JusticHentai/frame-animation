@@ -1,7 +1,9 @@
 import { DefaultOptions, InnerOptions, Options } from './types'
 import canvasClearness from './utils/canvasClearness'
 import canvasDraw from './utils/canvasDrawFrame'
+import frameTransform from './utils/frameTransform'
 import getCurrentFrame from './utils/getCurrentFrame'
+import getCurrentTimes from './utils/getCurrentTimes'
 import getDomSize from './utils/getDomSize'
 import imageLoad from './utils/imageLoad'
 
@@ -64,8 +66,11 @@ export default class FrameAnimation {
   }
 
   animeState = false // 帧动画状态 true 运行中 false 没有运行
+  playState = true // 帧动画播放状态 true 正放 false 倒放
   renderFrameID!: number // 记录渲染 ID
 
+  times = 0 // 用于限定播放次数 0表示无限次
+  lastTimes = 0 // 用于记录上一次的次数
   lastFrame = 0 // 用于记录渲染期间的上一帧
   initialFrame!: number // 用于记录每次动作的开始帧数
   initialTime!: number // 用于记录每次动作的开始时间
@@ -85,21 +90,51 @@ export default class FrameAnimation {
    * 渲染每一帧
    */
   renderFrame = () => {
-    // 递归退出条件
-    if (!this.animeState) {
-      cancelAnimationFrame(this.renderFrameID)
-      return
-    }
-
     const { frame, duration, el, column } = this.options
 
     // 获取当前要渲染的帧数
-    const currentFrame = getCurrentFrame({
+    let currentFrame = getCurrentFrame({
       initialFrame: this.initialFrame,
       initialTime: this.initialTime,
       duration,
       frame,
     })
+
+    // 获取当前动画的次数
+    const currentTimes = getCurrentTimes({
+      initialFrame: this.initialFrame,
+      initialTime: this.initialTime,
+      duration,
+      frame,
+    })
+
+    // 每播完一次回调
+    if (currentTimes !== this.lastTimes) {
+      this.options.completeOne && this.options.completeOne(currentTimes)
+      this.lastTimes = currentTimes
+    }
+
+    // 暂停 或者 次数耗尽退出
+    if (!this.animeState || (this.times !== 0 && currentTimes === this.times)) {
+      this.animeState = false
+      cancelAnimationFrame(this.renderFrameID)
+
+      if (this.times !== 0 && currentTimes === this.times) {
+        this.times = 0
+        this.options.complete && this.options.complete()
+      }
+
+      return
+    }
+
+    // 根据播放模式获取帧数
+    currentFrame = frameTransform({
+      playState: this.playState,
+      currentFrame,
+      frame,
+    })
+
+    console.log(currentFrame)
 
     // 已经渲染过就不反复渲染了
     if (currentFrame === this.lastFrame) {
@@ -128,6 +163,9 @@ export default class FrameAnimation {
 
     // 继续渲染下一帧
     this.renderFrameID = requestAnimationFrame(this.renderFrame)
+
+    // 每帧回调
+    this.options.frameComplete && this.options.frameComplete(currentFrame)
   }
 
   /**
@@ -151,6 +189,34 @@ export default class FrameAnimation {
    */
   pause(): FrameAnimation {
     this.animePause()
+
+    return this
+  }
+
+  /**
+   * 播放特定次数
+   * @param n
+   */
+  playTimes(n: number): FrameAnimation {
+    // 播放到一半时调用播放多次 前面次数不算 多加一次
+    this.times = this.lastFrame === 0 ? n : n + 1
+    this.animeStart()
+
+    return this
+  }
+
+  /**
+   * 倒放
+   */
+  reverse(): FrameAnimation {
+    const { frame } = this.options
+
+    this.animePause()
+
+    this.lastFrame = frame - this.lastFrame + 1
+    this.playState = false
+
+    this.animeStart()
 
     return this
   }

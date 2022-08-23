@@ -9,12 +9,12 @@ export interface Options {
  * 获取当前帧数下标
  * @param options
  */
-export default function getCurrentFrame(options: Options): number {
+export default function getCurrentTimes(options: Options): number {
   const { initialTime, initialFrame, duration, frame } = options
 
   const currentTime = Date.now() - initialTime // 每次重置后 的 当前总时间
   const currentFrame =
     Math.floor(currentTime / (duration / frame)) + initialFrame // 当前总帧数
 
-  return (currentFrame % frame) + 1 // 当前帧数
+  return Math.floor(currentFrame / frame) // 播到一半不算播完
 }
