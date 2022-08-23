@@ -38,6 +38,19 @@ export default class FrameAnimation {
       height,
       canvas: this.canvas,
     })
+
+    const { frame, column } = this.options
+
+    // 画第一帧
+    canvasDraw({
+      currentFrame: 1,
+      frame,
+      column,
+      width,
+      height,
+      canvas: this.canvas,
+      image: this.image,
+    })
   }
 
   // image 实例
