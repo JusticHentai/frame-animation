@@ -179,6 +179,8 @@ export default class FrameAnimation {
    * 启动动画
    */
   play(): FrameAnimation {
+    this.playState = true
+
     this.animeStart()
 
     return this
